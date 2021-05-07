@@ -1,13 +1,14 @@
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '10.x'
+      versionSpec: '14.x'
     displayName: 'Install Node.js'
-  - task: 1ESLighthouseEng.PipelineArtifactCaching.RestoreAndSaveCacheV1.RestoreAndSaveCache@1
+  - task: Cache@2
+    displayName: Cache Yarn packages
     inputs:
-      keyfile: '**/yarn.lock, !**/node_modules/**/yarn.lock, !**/.*/**/yarn.lock'
-      targetfolder: '**/node_modules, !**/node_modules/**/node_modules'
-      vstsFeed: 'nx_azure_node_modules_cache_feed'
+      key: 'yarn.lock'
+      path: '$(System.DefaultWorkingDirectory)/node_modules'
+      cacheHitVar: CacheRestored
   - script: |
       yarn install --ignore-engines --frozen-lockfile
     displayName: Install dependencies only if there is no cache available
