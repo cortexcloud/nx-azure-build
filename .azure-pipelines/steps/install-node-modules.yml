@@ -11,5 +11,5 @@ steps:
       cacheHitVar: CacheRestored
   - script: |
       yarn install --ignore-engines --frozen-lockfile
-    displayName: Install dependencies only if there is no cache available
+    displayName: Yarn install even there a cache hit
     # condition: ne(variables['CacheRestored'], 'true')
