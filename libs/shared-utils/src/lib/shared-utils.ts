@@ -1,1 +1,1 @@
-export const SHARED_CONST = 'Some Shared Const';
+export const SHARED_CONST = 'Some Changed Shared Const';
